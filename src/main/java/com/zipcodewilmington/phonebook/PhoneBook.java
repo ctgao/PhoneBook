@@ -16,7 +16,7 @@ public class PhoneBook {
     }
 
     public PhoneBook() {
-        this(new TreeMap<>());
+        this(new LinkedHashMap<>());
     }
 
     public void add(String name, String phoneNumber) {
@@ -63,14 +63,11 @@ public class PhoneBook {
 
     public List<String> getAllContactNames() {
         List<String> contacts = new ArrayList<>();
-        for(String s : phonebook.keySet()){
-            contacts.add(s);
-        }
-//        phonebook.keySet().forEach(s -> contacts.add(s));
+        phonebook.keySet().forEach(s -> contacts.add(s));
         return contacts;
     }
 
     public Map<String, List<String>> getMap() {
-        return new HashMap<>(phonebook);
+        return phonebook;
     }
 }
