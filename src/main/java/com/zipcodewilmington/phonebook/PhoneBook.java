@@ -1,43 +1,55 @@
 package com.zipcodewilmington.phonebook;
 
-import java.util.List;
-import java.util.ArrayList;
+import java.util.*;
 //import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.Map;
+
 
 /**
  * Created by leon on 1/23/18.
  * Made WAY better by kristofer 6/16/20
  */
 public class PhoneBook {
-
     private final Map<String, List<String>> phonebook;
 
     public PhoneBook(Map<String, List<String>> map) {
-        this.phonebook = null;
+        this.phonebook = map;
     }
 
     public PhoneBook() {
-        this(null);
+        this(new TreeMap<>());
     }
 
     public void add(String name, String phoneNumber) {
+        // key doesn't exist in phonebook
+        if(!phonebook.containsKey(name)){
+            phonebook.put(name, new ArrayList<>());
+        }
+        phonebook.get(name).add(phoneNumber);
     }
 
     public void addAll(String name, String... phoneNumbers) {
+        for(String s : phoneNumbers){
+            add(name, s);
+        }
     }
 
     public void remove(String name) {
+        phonebook.remove(name);
     }
 
     public Boolean hasEntry(String name) {
-        return null;
+        return phonebook.containsKey(name);
+    }
+
+    public Boolean hasEntry(String name, String phoneNumber) {
+        if(!hasEntry(name)){
+            return false;
+        }
+        return phonebook.get(name).contains(phoneNumber);
     }
 
     public List<String> lookup(String name) {
-        return null;
+        return phonebook.get(name);
     }
 
     public String reverseLookup(String phoneNumber)  {
@@ -49,6 +61,6 @@ public class PhoneBook {
     }
 
     public Map<String, List<String>> getMap() {
-        return null;
+        return new HashMap<>(phonebook);
     }
 }
