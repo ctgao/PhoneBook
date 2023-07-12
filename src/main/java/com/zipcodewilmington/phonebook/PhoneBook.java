@@ -53,11 +53,21 @@ public class PhoneBook {
     }
 
     public String reverseLookup(String phoneNumber)  {
+        for(String key : phonebook.keySet()){
+            if(hasEntry(key, phoneNumber)){
+                return key;
+            }
+        }
         return null;
     }
 
     public List<String> getAllContactNames() {
-        return null;
+        List<String> contacts = new ArrayList<>();
+        for(String s : phonebook.keySet()){
+            contacts.add(s);
+        }
+//        phonebook.keySet().forEach(s -> contacts.add(s));
+        return contacts;
     }
 
     public Map<String, List<String>> getMap() {
